@@ -1,7 +1,7 @@
 FROM node:20-alpine
 
 RUN apk update && \
-    apk add --no-cache sudo && \
+    apk add --no-cache sudo gcompat && \
     mkdir -p /homebridge && \
     adduser -D homebridge && \
     chown -R homebridge:homebridge /homebridge && \
