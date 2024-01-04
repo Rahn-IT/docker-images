@@ -1,7 +1,8 @@
-FROM node:20-alpine
+FROM node:20-bookworm
 
-RUN apk update && \
-    apk add --no-cache sudo gcompat && \
+RUN apt-get update && \
+    apt-get upgrade && \
+    apk-get install sudo && \
     mkdir -p /homebridge && \
     adduser -D homebridge && \
     chown -R homebridge:homebridge /homebridge && \
