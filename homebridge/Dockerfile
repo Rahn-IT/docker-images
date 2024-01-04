@@ -1,10 +1,10 @@
 FROM node:20-bookworm
 
 RUN apt-get update && \
-    apt-get upgrade && \
-    apk-get install sudo && \
+    apt-get upgrade -y && \
+    apt-get install -y sudo && \
     mkdir -p /homebridge && \
-    adduser -D homebridge && \
+    useradd homebridge && \
     chown -R homebridge:homebridge /homebridge && \
     echo "homebridge    ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     npm install -g homebridge homebridge-config-ui-x
