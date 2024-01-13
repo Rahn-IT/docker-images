@@ -22,6 +22,7 @@ steps:
   - echo "Commit\:$DRONE_COMMIT"
   - |
     for dir in $(ls -d */); do
+      echo "found dir $dir"
       dir=${dir%*/}
       echo "Building $dir..."
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
