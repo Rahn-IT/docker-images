@@ -25,6 +25,6 @@ steps:
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
         echo "Changes in $dir"
       fi
-        docker build -t "https://ghcr.io/rahn-it/$dir" $dir
+        docker build -t "rahn-it/$dir" $dir
     done
   
