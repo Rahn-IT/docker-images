@@ -23,7 +23,7 @@ steps:
   - |
     for dir in $(ls -d */); do
       echo "found dir $dir"
-      image=${dir::-1}
+      image=$${dir::-1}
       echo "Building $image ..."
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
         echo "Changes in $image"
