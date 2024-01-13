@@ -23,11 +23,11 @@ steps:
   - |
     for dir in $(ls -d */); do
       echo "found dir $dir"
-      dir=${dir%*/}
-      echo "Building $dir..."
+      image=${dir%*/}
+      echo "Building $image ..."
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
-        echo "Changes in $dir"
+        echo "Changes in $image"
       fi
-        docker build -t "rahn-it/$dir" $dir
+        docker build -t "rahn-it/$image" $dir
     done
   
