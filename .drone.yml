@@ -15,6 +15,7 @@ steps:
   - |
     for dir in $(ls -d */); do
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
+        echo "Changes in $dir"
       fi
         docker build -t "https://ghcr.io/rahn-it/$dir" $dir
     done
