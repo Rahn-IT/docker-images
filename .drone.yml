@@ -23,7 +23,7 @@ steps:
   - apk update
   - apk add git
   - docker login ghcr.io -u "$GITHUB_USER" -p "$GITHUB_TOKEN" 
-  - echo "Trigger DRONE_BUILD_TRIGGER"
+  - echo "Trigger $DRONE_BUILD_TRIGGER"
   - |
     for dir in $(ls -d */); do
       echo "found dir $dir"
