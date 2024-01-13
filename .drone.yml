@@ -22,7 +22,7 @@ steps:
   - echo "Commit\:$DRONE_COMMIT"
   - |
     for dir in $(ls -d */); do
-      dir=${dir%*/}
+      dir=\${dir%*/}
       if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
         echo "Changes in $dir"
       fi
