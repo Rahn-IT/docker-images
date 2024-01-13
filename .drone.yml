@@ -22,11 +22,9 @@ steps:
   commands:
   - apk update
   - apk add git
-  - echo "Before\:$DRONE_COMMIT_BEFORE"
-  - echo "After\:$DRONE_COMMIT_AFTER"
-  - echo "Commit\:$DRONE_COMMIT"
+  - docker login ghcr.io -u "$GITHUB_USER" -p "$GITHUB_TOKEN" 
+  - echo "Trigger DRONE_BUILD_TRIGGER"
   - |
-    docker login ghcr.io -u "$GITHUB_USER" -p "$GITHUB_TOKEN" 
     for dir in $(ls -d */); do
       echo "found dir $dir"
       image=$${dir::-1}
