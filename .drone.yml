@@ -12,5 +12,12 @@ steps:
   - echo "Before\:$DRONE_COMMIT_BEFORE"
   - echo "After\:$DRONE_COMMIT_AFTER"
   - echo "Commit\:$DRONE_COMMIT"
-  - git diff $DRONE_COMMIT_BEFORE
+  - |
+    for dir in $(ls -d */); do
+      if ! git diff $DRONE_COMMIT_BEFORE --quiet; then
+        echo "Found changes in $dir"
+      else
+        echo "No changes in $dir"
+      fi
+    done
   
