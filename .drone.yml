@@ -1,0 +1,10 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: test
+  image: docker
+  commands:
+  - git diff $DRONE_COMMIT_BEFORE
+  
