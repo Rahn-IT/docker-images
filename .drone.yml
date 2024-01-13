@@ -2,10 +2,18 @@ kind: pipeline
 type: docker
 name: default
 
+volumes:
+- name: docker-sock
+  host:
+    path: /var/run/docker.sock
+
 steps:
 - name: test
   image: docker
   privileged: true
+  volumes:
+  - name: docker-sock
+    path: /var/run/docker.sock
   commands:
   - apk update
   - apk add git
