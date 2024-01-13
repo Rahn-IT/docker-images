@@ -6,5 +6,7 @@ steps:
 - name: test
   image: docker
   commands:
+  - apk update
+  - apk add git
   - git diff $DRONE_COMMIT_BEFORE
   
