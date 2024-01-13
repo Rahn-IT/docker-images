@@ -24,10 +24,10 @@ steps:
     for dir in $(ls -d */); do
       echo "found dir $dir"
       image=$${dir::-1}
-      echo "Building $image ..."
-      if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
-        echo "Changes in $image"
+      if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir || $BUILD_ALL; then
+        echo "Building $image ..."
+        docker build -t "rahn-it/$image" --squash $dir
+        docker image push
       fi
-        docker build -t "rahn-it/$image" $dir
     done
   
