@@ -27,8 +27,7 @@ steps:
       if (! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir) || $BUILD_ALL; then
         echo "Building $image ..."
         docker build -t "rahn-it/$image" --squash $dir
-        docker image tag "rahn-it/$image" "https://ghcr.io/rahn-it/$image"
-        docker image push "https://ghcr.io/rahn-it/$image"
+        docker image push "ghcr.io/rahn-it/$image"
       fi
     done
   
