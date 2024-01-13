@@ -14,7 +14,7 @@ steps:
   - echo "Commit\:$DRONE_COMMIT"
   - |
     for dir in $(ls -d */); do
-      if ! git diff $DRONE_COMMIT_BEFORE -- $dir --quiet; then
+      if ! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir; then
         echo "Found changes in $dir"
       else
         echo "No changes in $dir"
