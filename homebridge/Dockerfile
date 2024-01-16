@@ -1,5 +1,7 @@
 FROM node:20-bookworm
 
+LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/homebridge"
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y sudo && \
