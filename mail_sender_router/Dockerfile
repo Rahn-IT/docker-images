@@ -8,7 +8,7 @@ RUN apt-get update && \
     echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections && \
     apt-get install postfix -y && \
     apt-get clean && \
-    postconf -e"sender_dependent_relayhost_maps = hash:/etc/postfix/relay_maps" && \
+    postconf -e "sender_dependent_relayhost_maps = hash:/etc/postfix/relay_maps" && \
     postconf -e "maillog_file = /dev/stdout" && \
     postconf -e "smtp_sasl_auth_enable = yes" && \
     postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_password" && \
