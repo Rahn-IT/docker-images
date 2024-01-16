@@ -36,6 +36,27 @@ echo creating new resolv.conf
 cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
 
 echo "configuration done"
+
+if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
+  echo "##### GENERATING NEW SSL CERTIFICATE #####"
+  hostname=$(hostname)
+  mkdir /tmp/ssl
+  openssl genrsa -des3 --passout pass:1111 -out /tmp/ssl/rsa.key 4096
+  openssl req -new -passin pass:1111 -key /tmp/ssl/rsa.key -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -out /tmp/ssl/rsa.csr
+  openssl x509 -req --passin  pass:1111 -days 365 -in /tmp/ssl/rsa.csr -signkey /tmp/ssl/rsa.key -out /tmp/ssl/rsa.cer
+  openssl rsa --passin pass:1111  -in /tmp/ssl/rsa.key -out /tmp/ssl/rsa.key.nopass
+  mv -f /tmp/ssl/rsa.key.nopass /tmp/ssl/rsa.key
+  openssl req -new -x509 -extensions v3_ca -passout pass:1111 -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -keyout /tmp/ssl/cakey.pem -out /tmp/ssl/cacert.pem -days 3650
+  mv /tmp/ssl/rsa.key /etc/ssl/store/private/ssl.key
+  mv /tmp/ssl/rsa.cer /etc/ssl/store/certs/ssl.cer
+  mv /tmp/ssl/cacert.pem /etc/ssl/store/certs/ca.pem
+  mv /tmp/ssl/cakey.pem /etc/ssl/store/private/ca.key
+  rm -r /tmp/ssl
+fi
+
+echo "##### CURRENT SSL CERTIFICATE #####"
+cat /etc/ssl/store/certs/ssl.cer
+
 echo "##### STARTING POSTFIX #####"
 
 

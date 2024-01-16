@@ -8,15 +8,29 @@ RUN apt-get update && \
     echo "postfix postfix/main_mailer_type string 'Satellite system'" | debconf-set-selections && \
     apt-get install postfix -y && \
     apt-get clean && \
+    mkdir -p /etc/ssl/store/certs /etc/ssl/store/private && \
     postconf -e "sender_dependent_relayhost_maps = hash:/etc/postfix/relay_maps" && \
     postconf -e "maillog_file = /dev/stdout" && \
     postconf -e "smtp_sasl_auth_enable = yes" && \
     postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd" && \
     postconf -e "smtp_sasl_security_options = noanonymous" && \
     postconf -e "smtp_tls_security_level = encrypt" && \
-    postconf -e "smtp_tls_note_starttls_offer = yes"
+    postconf -e "smtp_tls_note_starttls_offer = yes" && \
+    postconf -e 'smtpd_tls_auth_only = no' && \
+    postconf -e 'smtp_use_tls = yes' && \
+    postconf -e 'smtpd_use_tls = yes' && \
+    postconf -e 'smtp_tls_note_starttls_offer = yes' && \
+    postconf -e 'smtpd_tls_key_file = /etc/ssl/store/private/ssl.key' && \
+    postconf -e 'smtpd_tls_cert_file = /etc/ssl/store/certs/ssl.crt' && \
+    postconf -e 'smtpd_tls_CAfile = /etc/ssl/store/certs/cacert.pem' && \
+    postconf -e 'smtpd_tls_loglevel = 1' && \
+    postconf -e 'smtpd_tls_received_header = yes' && \
+    postconf -e 'smtpd_tls_session_cache_timeout = 3600s' && \
+    postconf -e 'tls_random_source = dev:/dev/urandom'
 
 ENV TRUSTED_NETWORKS="127.0.0.1/8"
+
+VOLUME /etc/ssl/store
 
 EXPOSE 25
 
