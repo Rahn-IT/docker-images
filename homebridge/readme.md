@@ -1,5 +1,7 @@
 # Homebridge
 
+Image URL: ``ghcr.io/rahn-it/homebridge``
+
 This is a debian based, minimal homebridge image.
 The image itself already contains nodejs, homebridge and homebridge-ui.
 
