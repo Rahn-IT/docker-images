@@ -28,7 +28,7 @@ steps:
     for dir in $(ls -d */); do
       echo "found dir $dir"
       image=$${dir::-1}
-      if (! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir) || $BUILD_ALL; then
+      if (! git diff --quiet $DRONE_COMMIT_BEFORE -- $dir) || [ ! -z "$BUILD_ALL" ]; then
         echo "Building $image ..."
         # docker build -t "ghcr.io/rahn-it/$image" --squash $dir
         # docker push "ghcr.io/rahn-it/$image"
