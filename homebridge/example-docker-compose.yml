@@ -1,0 +1,15 @@
+version: "3.6"
+
+volumes:
+  data:
+
+services: 
+  homebridge:
+    image: ghcr.io/rahn-it/homebridge
+    pull_policy: build
+    network_mode: host
+    restart: always
+    volumes: 
+    - data:/homebridge
+    environment: 
+      HOMEBRIDGE_PORT: 8080
