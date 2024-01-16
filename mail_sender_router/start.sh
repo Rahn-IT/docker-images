@@ -30,6 +30,11 @@ postmap /etc/postfix/sasl_passwd
 echo "setting allowed networks to $TRUSTED_NETWORKS"
 postconf -e "mynetworks = $TRUSTED_NETWORKS"
 
+echo deleting old resolv.conf
+rm /var/spool/postfix/etc/resolv.conf
+echo creating new resolv.conf
+cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
+
 echo "configuration done"
 echo "##### STARTING POSTFIX #####"
 
