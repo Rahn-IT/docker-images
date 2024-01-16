@@ -4,7 +4,10 @@ image: ``ghcr.io/rahn-it/mail_sender_router``
 
 This is a really simple preconfigured Postfix instace, to route to the correct smarthost based on the sender.
 
-There are 3 types of env variables. All of them are based on a counter. You can as many as you'd like.
+To set the allowed senders use this env variable:
+``TRUSTED_NETWORKS="127.0.0.1/8 192.168.0.1/24"
+
+There are 3 more types of env variables. All of them are based on a counter. You can as many as you'd like.
 Just make sure that you have all 3 variables set for each number.
 
 
