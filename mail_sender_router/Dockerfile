@@ -1,6 +1,6 @@
 FROM node:20-bookworm
 
-LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/mail_sender_router"
+LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/tree/master/mail_sender_router"
 
 RUN apt-get update && \
     apt-get upgrade -y && \

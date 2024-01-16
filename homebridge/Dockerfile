@@ -1,6 +1,6 @@
 FROM node:20-bookworm
 
-LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/homebridge"
+LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/tree/master/homebridge"
 
 RUN apt-get update && \
     apt-get upgrade -y && \
