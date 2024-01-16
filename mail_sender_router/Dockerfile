@@ -11,7 +11,7 @@ RUN apt-get update && \
     postconf -e "sender_dependent_relayhost_maps = hash:/etc/postfix/relay_maps" && \
     postconf -e "maillog_file = /dev/stdout" && \
     postconf -e "smtp_sasl_auth_enable = yes" && \
-    postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_password" && \
+    postconf -e "smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd" && \
     postconf -e "smtp_sasl_security_options = noanonymous" && \
     postconf -e "smtp_tls_security_level = encrypt" && \
     postconf -e "smtp_tls_note_starttls_offer = yes"
