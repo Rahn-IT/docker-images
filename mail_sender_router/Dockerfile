@@ -15,6 +15,8 @@ RUN apt-get update && \
     postconf -e "smtp_tls_security_level = encrypt" && \
     postconf -e "smtp_tls_note_starttls_offer = yes"
 
+EXPOSE 25
+
 COPY ./start.sh /start.sh
 # COPY ./main.cf /etc/postfix/main.cf
 
