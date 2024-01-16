@@ -27,8 +27,13 @@ postmap /etc/postfix/relay_maps
 printf "$credentials" > /etc/postfix/sasl_passwd
 postmap /etc/postfix/sasl_passwd
 
+echo "setting allowed networks"
+postconf -e "mynetworks $TRUSTED_NETWORKS"
+
 echo "configuration done"
 echo "##### STARTING POSTFIX #####"
 
 
 exec postfix start-fg
+
+echo 

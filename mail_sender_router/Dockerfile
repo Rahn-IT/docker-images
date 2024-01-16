@@ -15,6 +15,8 @@ RUN apt-get update && \
     postconf -e "smtp_tls_security_level = encrypt" && \
     postconf -e "smtp_tls_note_starttls_offer = yes"
 
+ENV TRUSTED_NETWORKS="127.0.0.1/8"
+
 EXPOSE 25
 
 COPY ./start.sh /start.sh
