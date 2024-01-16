@@ -21,8 +21,8 @@ EMAIL_2="@smarthost.com"
 This variable contains the server to use for relaying.
 e.g.:
 ```
-SERVER_1="\[mail.example.com\]:587"
-SERVER_2="\[mail.smarthost.com\]:25"
+SERVER_1="[mail.example.com]:587"
+SERVER_2="[mail.smarthost.com]:25"
 ```
 
 
