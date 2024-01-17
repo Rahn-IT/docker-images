@@ -7,6 +7,11 @@ This is a really simple preconfigured Postfix instace, to route to the correct s
 To set the allowed senders use this env variable:
 ``TRUSTED_NETWORKS="127.0.0.1/8 192.168.0.1/24"``
 
+If you want to force incoming mails to use TLS, you can set the following variable:
+``TLS_ONLY=true``
+If you want to allow non-tls mail, then set:
+``TLS_ONLY=""``
+
 You should also create a volume at ``/etc/ssl/store``
 The container will generate a self signed certificate and log it on each start, so you can encrypt your incoming trafic.
 

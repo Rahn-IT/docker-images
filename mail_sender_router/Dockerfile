@@ -29,6 +29,7 @@ RUN apt-get update && \
     postconf -e 'tls_random_source = dev:/dev/urandom'
 
 ENV TRUSTED_NETWORKS="127.0.0.1/8"
+ENV TLS_ONLY=true
 
 VOLUME /etc/ssl/store
 

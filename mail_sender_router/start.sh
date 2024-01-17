@@ -35,6 +35,14 @@ rm /var/spool/postfix/etc/resolv.conf
 echo creating new resolv.conf
 cp /etc/resolv.conf /var/spool/postfix/etc/resolv.conf
 
+if [ -n "$TLS_ONLY" ]; then
+  echo "TLS_ONLY is set, forcing TLS"
+  postconf -e "smtpd_tls_security_level = encrypt"
+else
+  echo "TLS_ONLY is not set, TLS is optional"
+  postconf -e "smtpd_tls_security_level = may"
+fi
+
 echo "configuration done"
 
 if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
