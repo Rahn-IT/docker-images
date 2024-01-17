@@ -46,14 +46,17 @@ if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
   openssl x509 -req --passin  pass:1111 -days 365 -in /tmp/ssl/rsa.csr -signkey /tmp/ssl/rsa.key -out /tmp/ssl/rsa.cer
   openssl rsa --passin pass:1111  -in /tmp/ssl/rsa.key -out /tmp/ssl/rsa.key.nopass
   mv -f /tmp/ssl/rsa.key.nopass /tmp/ssl/rsa.key
-  openssl req -new -x509 -extensions v3_ca -passout pass:1111 -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -keyout /tmp/ssl/cakey.pem -out /tmp/ssl/cacert.pem -days 3650
+  openssl req -new -x509 -extensions v3_ca -passout pass:1111 -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -keyout /tmp/ssl/cakey.pem -out /tmp/ssl/cacert.cer -days 3650
+  mkdir -p /etc/ssl/store/private /etc/ssl/store/certs
   mv /tmp/ssl/rsa.key /etc/ssl/store/private/ssl.key
   mv /tmp/ssl/rsa.cer /etc/ssl/store/certs/ssl.cer
-  mv /tmp/ssl/cacert.pem /etc/ssl/store/certs/ca.pem
+  mv /tmp/ssl/cacert.cer /etc/ssl/store/certs/ca.cer
   mv /tmp/ssl/cakey.pem /etc/ssl/store/private/ca.key
   rm -r /tmp/ssl
 fi
 
+# echo "##### CURRENT CA CERTIFICATE #####"
+# cat /etc/ssl/store/certs/ca.cer
 echo "##### CURRENT SSL CERTIFICATE #####"
 cat /etc/ssl/store/certs/ssl.cer
 
