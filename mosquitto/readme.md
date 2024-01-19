@@ -8,5 +8,5 @@ It just adds a small start script which creates the config.
 | Environment Variable | Effect                                 |
 |----------------------|----------------------------------------|
 | ``PORT``             | Selects the Port to listen on          |
-| ``USER``             | (Optional) sets the username for login |
+| ``USERNAME``             | (Optional) sets the username for login |
 | ``PASSWORD``         | (Optional) sets the password for login |
