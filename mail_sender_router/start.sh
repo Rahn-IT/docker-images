@@ -55,7 +55,7 @@ if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
   
   mkdir -p /etc/ssl/store/private /etc/ssl/store/certs
   mv /tmp/ssl/key.pem /etc/ssl/store/private/key.pem
-  mv /tmp/ssl/cert.pem /etc/ssl/store/private/cert.key
+  mv /tmp/ssl/cert.pem /etc/ssl/store/certs/cert.pem
   rm -r /tmp/ssl
 fi
 
