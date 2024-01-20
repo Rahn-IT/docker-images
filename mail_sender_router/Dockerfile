@@ -22,7 +22,7 @@ RUN apt-get update && \
     postconf -e 'smtp_tls_note_starttls_offer = yes' && \
     postconf -e 'smtpd_tls_key_file = /etc/ssl/store/private/ssl.key' && \
     postconf -e 'smtpd_tls_cert_file = /etc/ssl/store/certs/ssl.cer' && \
-    postconf -e 'smtpd_tls_CAfile = /etc/ssl/store/certs/cacert.cer' && \
+    postconf -e 'smtpd_tls_CAfile = /etc/ssl/store/certs/ca.cer' && \
     postconf -e 'smtpd_tls_loglevel = 1' && \
     postconf -e 'smtpd_tls_received_header = yes' && \
     postconf -e 'smtpd_tls_session_cache_timeout = 3600s' && \
