@@ -50,7 +50,7 @@ if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
   hostname=$(hostname)
   mkdir /tmp/ssl
   # generate rsa key of ca
-  openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"
+  openssl req -x509 -newkey rsa:4096 -keyout /tmp/ssl/key.pem -out /tmp/ssl/cert.pem -sha256 -days 3650 -nodes -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"
   
   
   mkdir -p /etc/ssl/store/private /etc/ssl/store/certs
