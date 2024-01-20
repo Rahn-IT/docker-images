@@ -51,7 +51,7 @@ if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
   mkdir /tmp/ssl
   openssl genrsa -des3 --passout pass:1111 -out /tmp/ssl/rsa.key 4096
   openssl req -new -passin pass:1111 -key /tmp/ssl/rsa.key -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -out /tmp/ssl/rsa.csr
-  openssl x509 -req --passin  pass:1111 -days 365 -in /tmp/ssl/rsa.csr -signkey /tmp/ssl/rsa.key -out /tmp/ssl/rsa.cer
+  openssl x509 -req --passin  pass:1111 -days 3650 -in /tmp/ssl/rsa.csr -signkey /tmp/ssl/rsa.key -out /tmp/ssl/rsa.cer
   openssl rsa --passin pass:1111  -in /tmp/ssl/rsa.key -out /tmp/ssl/rsa.key.nopass
   mv -f /tmp/ssl/rsa.key.nopass /tmp/ssl/rsa.key
   openssl req -new -x509 -extensions v3_ca -passout pass:1111 -subj "/C=DE/ST=Bayern/L=Tuessling/O=Rahn-IT/OU=IT/CN=$hostname"  -keyout /tmp/ssl/cakey.pem -out /tmp/ssl/cacert.cer -days 3650
