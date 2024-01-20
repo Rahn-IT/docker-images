@@ -63,8 +63,8 @@ if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
   rm -r /tmp/ssl
 fi
 
-# echo "##### CURRENT CA CERTIFICATE #####"
-# cat /etc/ssl/store/certs/ca.cer
+echo "##### CURRENT CA CERTIFICATE #####"
+cat /etc/ssl/store/certs/ca.cer
 echo "##### CURRENT SSL CERTIFICATE #####"
 cat /etc/ssl/store/certs/ssl.cer
 
