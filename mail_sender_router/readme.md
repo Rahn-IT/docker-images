@@ -12,6 +12,8 @@ If you want to force incoming mails to use TLS, you can set the following variab
 If you want to allow non-tls mail, then set:
 ``TLS_ONLY=""``
 
+Since Exchange servers like to defy their settings, you can set ``REPLACE_EMPTY_WITH`` to replace empty from fields with a generic email.
+
 It is recommended to create a volume at ``/var/spool/postfix`` in order to preserve deferred mails through restarts.
 
 You should also create a volume at ``/etc/ssl/store``
