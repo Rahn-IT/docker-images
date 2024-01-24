@@ -12,6 +12,8 @@ If you want to force incoming mails to use TLS, you can set the following variab
 If you want to allow non-tls mail, then set:
 ``TLS_ONLY=""``
 
+It is recommended to create a volume at ``/var/spool/postfix`` in order to preserve deferred mails through restarts.
+
 You should also create a volume at ``/etc/ssl/store``
 The container will generate a self signed certificate and log it on each start, so you can encrypt your incoming trafic.
 
@@ -30,6 +32,7 @@ EMAIL_2="@smarthost.com"
 
 ``SERVER_{counter}``
 This variable contains the server to use for relaying.
+The variable ``SERVER_1`` will be used as default relay.
 e.g.:
 ```
 SERVER_1="[mail.example.com]:587"

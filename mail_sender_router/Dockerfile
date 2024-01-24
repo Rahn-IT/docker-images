@@ -33,6 +33,7 @@ RUN apt-get update && \
 ENV TRUSTED_NETWORKS="127.0.0.0/8"
 ENV TLS_ONLY=true
 
+VOLUME /var/spool/postfix
 VOLUME /etc/ssl/store
 
 EXPOSE 25
