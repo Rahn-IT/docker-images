@@ -12,5 +12,7 @@ RUN apt-get update && \
 ENV REPORTS_FOLDER=INBOX \
     ARCHIVE_FOLDER=Archive
 
+COPY start.sh /start.sh
+
 USER parsedmarc
 CMD ["bash", "/start.sh"]
