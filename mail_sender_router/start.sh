@@ -49,7 +49,7 @@ fi
 
 echo "configuration done"
 
-if [ ! -f /etc/ssl/store/certs/ssl.cer ]; then
+if [ ! -f /etc/ssl/store/certs/cert.pem ]; then
   echo "##### GENERATING NEW SSL CERTIFICATE #####"
   hostname=$(hostname)
   mkdir /tmp/ssl
