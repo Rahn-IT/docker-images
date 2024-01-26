@@ -15,6 +15,7 @@ jobs:
       - run: echo "This job is running for commit SHA ${{ gitea.sha }}."
       - run: git rev-parse HEAD
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - run: "I hope this works"
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
