@@ -24,4 +24,4 @@ ssl = ${ES_USE_SSL}
 EOF
 
 
-exec parsedmarc -c /parsedmarc/config.ini
+exec parsedmarc -c /parsedmarc/config.ini --verbose
