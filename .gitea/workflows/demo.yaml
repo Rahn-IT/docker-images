@@ -19,4 +19,4 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ gitea.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "This job's status is ${{ job.status }}."
