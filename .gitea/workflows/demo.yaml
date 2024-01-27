@@ -13,7 +13,7 @@ jobs:
       - name: Add Git
         run: apk update && apk add git
       - name: Checkout
-        run: git clone ${{ gitea.repositoryUrl}}
+        run: echo "${{ toJson(gitea) }}"
       - run: |
           docker ps
           exit
