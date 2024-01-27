@@ -1,13 +1,17 @@
 name: Build to ghcr.io
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  schedule:
+  - cron: "@weekly"
+  workflow_dispatch
 
 jobs:
   Explore-Gitea-Actions:
     runs-on: ubuntu-latest
     container:
       image: docker
-      # volumes:
-      #   - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - name: Add Git
         run: apk update && apk add git
@@ -18,7 +22,7 @@ jobs:
           for dir in $(ls -d */); do
             echo "found dir $dir"
             image=${dir::-1}
-            if (! git diff --quiet ${{ gitea.event.before }} ${{ gitea.event.after }} $dir) || [ ! -z "$BUILD_ALL" ]; then
+            if (! git diff --quiet ${{ gitea.event.before }} ${{ gitea.event.after }} $dir) || [ "${{ gitea.event_name }}" = "cron" ]; then
               echo "Building $image ..."
               docker build -t "ghcr.io/rahn-it/$image" --squash $dir
               docker push "ghcr.io/rahn-it/$image"
