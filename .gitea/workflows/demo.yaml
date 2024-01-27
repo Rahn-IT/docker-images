@@ -12,10 +12,8 @@ jobs:
     steps:
       - name: Add Git
         run: apk update && apk add git
-      - name: Build clone url
-        run: echo "${{ gitea.event.repository.clone_url }}" | sed -e "s^//^//${{ gitea.event.pusher.username }}:pass@^"
-      - name: Checkout
-        run: git clone ${{ gitea.event.repository.clone_url }} --sparse
+      - name: Clone
+        run: echo "${{ gitea.event.repository.clone_url }}" | sed -e "s^//^//${{ gitea.event.pusher.username }}:pass@^" | git clone
       - name: list
         run: ls
       - name: debug
