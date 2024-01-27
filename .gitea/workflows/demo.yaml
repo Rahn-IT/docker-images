@@ -19,10 +19,11 @@ jobs:
           for dir in $(ls -d */); do
             echo "found dir $dir"
             image=${dir::-1}
-            echo "git diff --quiet ${{ gitea.event.before }} ${{ gitea.event.after }} $dir"
             if (! git diff --quiet ${{ gitea.event.before }} ${{ gitea.event.after }} $dir) || [ ! -z "$BUILD_ALL" ]; then
               echo "Building $image ..."
               docker build -t "ghcr.io/rahn-it/$image" --squash $dir
               docker push "ghcr.io/rahn-it/$image"
+            else
+              echo "no changes in $dir"
             fi
           done
