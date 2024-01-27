@@ -13,13 +13,13 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: |
-        docker login ghcr.io -u "${{ secrets.gh_user }}" -p "${{ secrets.gh_token }}"
-        for dir in $(ls -d */); do
-          echo "found dir $dir"
-          image=$${dir::-1}
-          if (! git diff --quiet ${{ gitea.event.before }} -- $dir) || [ ! -z "$BUILD_ALL" ]; then
-            echo "Building $image ..."
-            docker build -t "ghcr.io/rahn-it/$image" --squash $dir
-            docker push "ghcr.io/rahn-it/$image"
-          fi
-        done
+          docker login ghcr.io -u "${{ secrets.gh_user }}" -p "${{ secrets.gh_token }}"
+          for dir in $(ls -d */); do
+            echo "found dir $dir"
+            image=$${dir::-1}
+            if (! git diff --quiet ${{ gitea.event.before }} -- $dir) || [ ! -z "$BUILD_ALL" ]; then
+              echo "Building $image ..."
+              docker build -t "ghcr.io/rahn-it/$image" --squash $dir
+              docker push "ghcr.io/rahn-it/$image"
+            fi
+          done
