@@ -3,20 +3,18 @@ run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
 on: [push]
 
 jobs:
-  Clone:
+  Explore-Gitea-Actions:
     runs-on: ubuntu-latest
+    # container:
+    #   image: docker
+      # volumes:
+      #   - /var/run/docker.sock:/var/run/docker.sock
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-  Explore-Gitea-Actions:
-    runs-on: ubuntu-latest
-    container:
-      image: docker
-      # volumes:
-      #   - /var/run/docker.sock:/var/run/docker.sock
-    needs: Clone
-    steps:
       - run: |
+          docker ps
+          exit
           docker login ghcr.io -u "${{ secrets.gh_user }}" -p "${{ secrets.gh_token }}"
           for dir in $(ls -d */); do
             echo "found dir $dir"
