@@ -5,18 +5,21 @@ on: [push]
 jobs:
   Explore-Gitea-Actions:
     runs-on: ubuntu-latest
+    container:
+      image: docker
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ gitea.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by Gitea!"
-      - run: echo "🔎 The name of your branch is ${{ gitea.ref }} and your repository is ${{ gitea.repository }}."
       - name: Check out repository code
         uses: actions/checkout@v3
-      - run: echo "💡 The ${{ gitea.repository }} repository has been cloned to the runner."
-      - run: echo "This job is running for commits between ${{ gitea.sha }} and ${{ gitea.event.before }}."
-      - run: git rev-parse HEAD
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - run: echo "I hope this works"
-      - name: List files in the repository
-        run: |
-          ls ${{ gitea.workspace }}
-      - run: echo "This job's status is ${{ job.status }}."
+      - run: |
+        docker login ghcr.io -u "${{ secrets.gh_user }}" -p "${{ secrets.gh_token }}"
+        for dir in $(ls -d */); do
+          echo "found dir $dir"
+          image=$${dir::-1}
+          if (! git diff --quiet ${{ gitea.event.before }} -- $dir) || [ ! -z "$BUILD_ALL" ]; then
+            echo "Building $image ..."
+            docker build -t "ghcr.io/rahn-it/$image" --squash $dir
+            docker push "ghcr.io/rahn-it/$image"
+          fi
+        done
