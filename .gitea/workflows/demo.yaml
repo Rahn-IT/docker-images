@@ -15,7 +15,7 @@ jobs:
       - name: Clone
         run: git clone --depth 1 $(echo "${{ gitea.event.repository.clone_url }}" | sed -e "s^//^//:${{ gitea.token }}@^") .
       - run: |
-          docker login ghcr.io -u "${{ secrets.gh_user }}" -p "${{ secrets.gh_token }}"
+          docker login ghcr.io -u "${{ secrets.ghcr_user }}" -p "${{ secrets.ghcr_token }}"
           for dir in $(ls -d */); do
             echo "found dir $dir"
             image=${dir::-1}
