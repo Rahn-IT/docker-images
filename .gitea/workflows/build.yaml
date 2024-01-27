@@ -1,5 +1,4 @@
-name: Gitea Actions Demo
-run-name: ${{ gitea.actor }} is testing out Gitea Actions 🚀
+name: Build to ghcr.io
 on: [push]
 
 jobs:
