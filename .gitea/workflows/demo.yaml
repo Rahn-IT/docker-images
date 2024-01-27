@@ -13,9 +13,11 @@ jobs:
       - name: Add Git
         run: apk update && apk add git
       - name: Checkout
-        run: echo "${{ toJson(gitea) }}" --sparse
-      - name: List
+        run: git clone ${{ gitea.event.repository.clone_url }} --sparse
+      - name: list
         run: ls
+      - name: debug
+        run: echo "${{ toJson(gitea) }}" 
       - run: |
           docker ps
           exit
