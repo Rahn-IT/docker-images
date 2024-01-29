@@ -13,4 +13,11 @@ It's meant to be simplistic and easy to debug.
 
 You can use `HOMEBRIDGE_PORT` to change the port homebridge listens on. The default is `8080`.
 
-Feel free to take a look aat the Dockerfile.
+The Volume `/homebridge` is used to hold your installed plugins and configuration.
+
+Feel free to take a look at the Dockerfile.
+
+⚠️ WARNING ⚠️
+
+The volume structure is not compatible with the official image!
+Do not simply exchange the image with this one.
