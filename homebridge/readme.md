@@ -11,4 +11,6 @@ This image was created, because the official image was rolling out with an
 older Nodejs version, which wasn't recent for all the needed plugins.
 It's meant to be simplistic and easy to debug.
 
+You can use `HOMEBRIDGE_PORT` to change the port homebridge listens on. The default is `8080`.
+
 Feel free to take a look aat the Dockerfile.
