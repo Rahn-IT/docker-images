@@ -24,7 +24,7 @@ jobs:
             image=${dir::-1}
             if (! git diff --quiet ${{ gitea.event.before }} ${{ gitea.event.after }} $dir) || [ "${{ gitea.event_name }}" = "cron" ]; then
               echo "Building $image ..."
-              docker build -t "ghcr.io/rahn-it/$image" --squash $dir
+              docker build --pull -t "ghcr.io/rahn-it/$image" --squash $dir
               docker push "ghcr.io/rahn-it/$image"
             else
               echo "no changes in $dir"
