@@ -16,6 +16,7 @@ COPY ./start.sh /start.sh
 WORKDIR /homebridge
 USER homebridge
 
+
 ENV UIX_STRICT_PLUGIN_RESOLUTION=0 \
     HOMEBRIDGE_PORT=8080
 VOLUME /homebridge
