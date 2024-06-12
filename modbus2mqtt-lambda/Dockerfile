@@ -1,6 +1,6 @@
 FROM swift:latest as builder
 WORKDIR /swift
-RUN git clone https://github.com/acul009/modbus-2-mqtt-bridge.git /swift
+RUN git clone https://github.com/jollyjinx/modbus-2-mqtt-bridge.git /swift
 RUN swift build -c release
 RUN chmod -R u+rwX,go+rX-w /swift/.build/release/
 
