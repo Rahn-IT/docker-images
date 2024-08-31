@@ -23,7 +23,7 @@ fi
 if [ -n "$REPLACE_EMPTY_WITH" ]; then
   echo "replacing empty sender with $REPLACE_EMPTY_WITH"
   postconf -e "sender_canonical_maps = regexp:/etc/postfix/sender_canonical_maps"
-  echo "/^$/ $REPLACE_EMPTY_WITH" > /etc/postfix/sender_canonical_maps
+  echo "/^$/ $REPLACE_EMPTY_WITH\n/^<>$/ $REPLACE_EMPTY_WITH" > /etc/postfix/sender_canonical_maps
 fi
 
 while [ -n "$(eval echo \$EMAIL_${counter})" ]; do
