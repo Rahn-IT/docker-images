@@ -23,6 +23,7 @@ fi
 if [ -n "$REPLACE_EMPTY_WITH" ]; then
   echo "replacing empty sender with $REPLACE_EMPTY_WITH"
   postconf -e "sender_canonical_maps = regexp:/etc/postfix/sender_canonical_maps"
+  postconf -e "canonical_classes = envelope_sender"
   echo "/^<>$/ $REPLACE_EMPTY_WITH" > /etc/postfix/sender_canonical_maps
 fi
 
