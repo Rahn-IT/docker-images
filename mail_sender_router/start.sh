@@ -22,12 +22,13 @@ fi
 
 if [ -n "$REPLACE_EMPTY_WITH" ]; then
   echo "replacing empty sender with $REPLACE_EMPTY_WITH"
-    postconf -e "smtp_header_checks = regexp:/etc/postfix/header_check"
-    echo "/From: <>/ REPLACE From: $REPLACE_EMPTY_WITH" > /etc/postfix/header_check
+    # postconf -e "smtp_header_checks = regexp:/etc/postfix/header_check"
+    # postconf -e "local_header_rewrite_clients = static:all"
+    # echo "/From: <>/ REPLACE From: $REPLACE_EMPTY_WITH" > /etc/postfix/header_check
 
-  # postconf -e "sender_canonical_maps = regexp:/etc/postfix/sender_canonical_maps"
-  # postconf -e "canonical_classes = envelope_sender, header_sender"
-  # echo "/^<>$/ $REPLACE_EMPTY_WITH" > /etc/postfix/sender_canonical_maps
+  postconf -e "sender_canonical_maps = regexp:/etc/postfix/sender_canonical_maps"
+  postconf -e "canonical_classes = envelope_sender, header_sender"
+  echo "/^.*$/ $REPLACE_EMPTY_WITH" > /etc/postfix/sender_canonical_maps
 fi
 
 while [ -n "$(eval echo \$EMAIL_${counter})" ]; do
