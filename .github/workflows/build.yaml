@@ -16,7 +16,7 @@ jobs:
       - name: Add Git
         run: apk update && apk add git
       - name: Clone
-        run: git clone --depth 100 $(echo "${{ github.repositoryUrl }}" | sed -e "s^//^//:${{ github.token }}@^") .
+        run: git clone --depth 100 "${{ github.repositoryUrl }}" .
       - run: |
           echo "triggered by ${{ github.event_name }}"
           docker login ghcr.io -u "${{ github.actor }}" -p "${{ github.token }}"
