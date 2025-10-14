@@ -1,0 +1,33 @@
+name: Build to ghcr.io
+on:
+  push:
+    branches:
+      - master
+  schedule:
+  - cron: "2 0 * * SAT"
+  workflow_dispatch:
+
+jobs:
+  Build-Containers:
+    runs-on: ubuntu-latest
+    container:
+      image: docker
+    steps:
+      - name: Add Git
+        run: apk update && apk add git
+      - name: Clone
+        run: git clone --depth 100 $(echo "${{ github.event.repository.clone_url }}" | sed -e "s^//^//:${{ secrets.GITHUB_TOKEN }}@^") .
+      - run: |
+          echo "triggered by ${{ github.event_name }}"
+          docker login ghcr.io -u "${{ github.actor }}" -p "${{ secrets.GITHUB_TOKEN }}"
+          for dir in $(ls -d */); do
+            echo "found dir $dir"
+            image=${dir::-1}
+            if (! git diff --quiet ${{ github.event.before }} ${{ github.event.after }} $dir) || [ "${{ github.event_name }}" = "schedule" ]; then
+              echo "Building $image ..."
+              docker build --pull --no-cache -t "ghcr.io/rahn-it/$image" $dir
+              docker push "ghcr.io/rahn-it/$image"
+            else
+              echo "no changes in $dir"
+            fi
+          done
