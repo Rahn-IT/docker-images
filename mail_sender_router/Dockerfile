@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 
 LABEL org.opencontainers.image.source = "https://github.com/Rahn-IT/docker-images/tree/master/mail_sender_router"
 
