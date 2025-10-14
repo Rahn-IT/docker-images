@@ -16,10 +16,10 @@ jobs:
       - name: Add Git
         run: apk update && apk add git
       - name: Clone
-        run: git clone --depth 100 $(echo "${{ github.event.repository.clone_url }}" | sed -e "s^//^//:${{ secrets.GITHUB_TOKEN }}@^") .
+        run: git clone --depth 100 $(echo "${{ github.repositoryUrl }}" | sed -e "s^//^//:${{ github.token }}@^") .
       - run: |
           echo "triggered by ${{ github.event_name }}"
-          docker login ghcr.io -u "${{ github.actor }}" -p "${{ secrets.GITHUB_TOKEN }}"
+          docker login ghcr.io -u "${{ github.actor }}" -p "${{ github.token }}"
           for dir in $(ls -d */); do
             echo "found dir $dir"
             image=${dir::-1}
