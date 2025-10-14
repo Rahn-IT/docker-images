@@ -30,6 +30,7 @@ RUN apt-get update && \
     postconf -e 'smtp_tls_wrappermode = yes' && \
     postconf -e 'message_size_limit  = 102400000' && \
     postconf -e 'smtp_tls_security_level = encrypt'
+    postconf -e 'default_destination_rate_delay = 120s'
 
 ENV TRUSTED_NETWORKS="127.0.0.0/8"
 ENV TLS_ONLY=true
