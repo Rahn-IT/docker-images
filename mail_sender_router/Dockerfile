@@ -29,7 +29,7 @@ RUN apt-get update && \
     postconf -e 'tls_random_source = dev:/dev/urandom' && \
     postconf -e 'smtp_tls_wrappermode = yes' && \
     postconf -e 'message_size_limit  = 102400000' && \
-    postconf -e 'smtp_tls_security_level = encrypt'
+    postconf -e 'smtp_tls_security_level = encrypt' && \
     postconf -e 'default_destination_rate_delay = 120s'
 
 ENV TRUSTED_NETWORKS="127.0.0.0/8"
