@@ -29,7 +29,7 @@ if [ -n "$REPLACE_EMPTY_WITH" ]; then
 fi
 
 while [ -n "$(eval echo \$EMAIL_${counter})" ]; do
-  if [ -n "$(eval echo \$CREDENTIALS_${counter})" ]; do
+  if [ -n "$(eval echo \$CREDENTIALS_${counter})" ]; then
     credentials+="$(eval echo \$SERVER_${counter})    $(eval echo \$CREDENTIALS_${counter})\n"
     ((counter++))
   fi
